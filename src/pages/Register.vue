@@ -4,7 +4,7 @@
       <q-card class="fixed-center col-md-4 col-xs-12 bg-white" flat>
         <q-card-section>
           <div class="text-h6 q-pb-md">
-            Halaman Login
+            Halaman Register
           </div>
           <q-form
             @submit="onSubmit"
@@ -21,6 +21,22 @@
 
             <q-input
               filled
+              v-model="namaLengkap"
+              label="Nama Lengkap Anda"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Tolong Ketik Nama lengkap']"
+            />
+
+            <q-input
+              filled
+              v-model="email"
+              label="E-Mail Anda"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Tolong Ketik E-mail']"
+            />
+
+            <q-input
+              filled
               type="password"
               v-model="password"
               label="Password Anda"
@@ -30,8 +46,8 @@
               ]"
             />
             <div class="q-gutter-md">
-              <q-btn label="Login" type="submit" color="primary"/>
-              <q-btn label="Register" to="/register" color="primary"/>
+              <q-btn label="Register" type="submit" color="primary"/>
+              <q-btn label="Login" to="/" color="primary"/>
             </div>
         </q-form>
         </q-card-section>
@@ -44,23 +60,13 @@ export default {
   data () {
     return {
       username: null,
-      password: null
+      password: null,
+      namalengkap: null,
+      email: null
     }
   },
   methods: {
     onSubmit () {
-      if (this.username === 'dandi' && this.password === '18425024') {
-        this.$q.notify({
-          type: 'positive',
-          message: 'Selamat Berhasil Login'
-        })
-        this.$router.push('/home')
-      } else {
-        this.$q.notify({
-          type: 'negative',
-          message: 'Gagal Login, Username/Password Salah'
-        })
-      }
     },
     onReset () {
       this.username = null
